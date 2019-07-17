@@ -13,7 +13,7 @@ css也没用精灵图做优化
 
 ## Page-build
 
-<https://nanarino.github.io/nanarino-jigsaw/>
+<https://nanarino.github.io/jigsaw/>
 
 
 
