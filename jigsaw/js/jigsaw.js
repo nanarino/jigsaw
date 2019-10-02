@@ -75,7 +75,7 @@ window.onload = function() {
 				detime++
 				[this.pro.pst, last.pro.pst] = [last.pst, this.pst]
                 window.r&&isWin()//时间戳存在就判断
-			}else if(i != '00') { //无法换位
+			}else if(i != '33') { //无法换位
 				this.style.opacity = 0.3
 				const that = this
 				setTimeout(function() {
