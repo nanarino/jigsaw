@@ -7,7 +7,7 @@ const shuffle = arr => { //打乱数组
 		arr[len - i - 1] = temp;
 	}
 	return arr;
-}
+};
 
 const isValid = arr => { //判断数列的逆序是否为偶数  偶数=>有解
 	let count = 0, len = arr.length;
@@ -19,7 +19,7 @@ const isValid = arr => { //判断数列的逆序是否为偶数  偶数=>有解
 		}
 	}
 	return count % 2 === 0;
-}
+};
 
 window.onload = ()=>{
 	const jigsawW = Math.min((window.innerWidth/4 - 2.5)|0, 194);
@@ -47,15 +47,15 @@ window.onload = ()=>{
 		thisJigsaw.pro.pst = i;
 		thisJigsaw.innerHTML = imgpath + i + ".jpg'/>";
 		return thisJigsaw;
-	}
+	};
 	
-	function isWin() {//判断拼图名与位置是否全等
+	const isWin =()=>{//判断拼图名与位置是否全等
 		for(let i of pstArr) {
 			if(window['jigsaw' + i].pst !== i) return;
 		}
 		Controller.style.display = "block";
-		Controller.innerHTML = `<p>Nice! ${new Date()-r}ms</p><button onclick='history.go(0)'>restart</button>`;
-	}
+		Controller.innerHTML = `<p>Nice! ${((new Date()-r)/1000)|0}s</p><button onclick='history.go(0)'>restart</button>`;
+	};
 
 	for(let i of pstArr) {
 		jigsawInit(i).onclick = function() {
