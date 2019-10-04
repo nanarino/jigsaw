@@ -1,19 +1,18 @@
-function shuffle(arr) { //随机排列数组
-	var len = arr.length;
-	for(var i = 0; i < len - 1; i++){
-		var idx = Math.floor(Math.random() * (len - i));
-		var temp = arr[idx];
+const shuffle = arr => { //打乱数组
+	const len = arr.length;
+	for(let i = 0; i < len - 1; i++){
+		let idx = Math.floor(Math.random() * (len - i));
+		let temp = arr[idx];
 		arr[idx] = arr[len - i - 1];
 		arr[len - i - 1] = temp;
 	}
 	return arr;
 }
 
-function isValid(arr) { //判断数列的逆序是否为偶数  偶数=>有解
-	var count = 0;
-	var len = arr.length;
-	for(var i = 0; i < len; i++) {
-		for(var j = i + 1; j < len; j++) {
+const isValid = arr => { //判断数列的逆序是否为偶数  偶数=>有解
+	let count = 0, len = arr.length;
+	for(let i = 0; i < len; i++) {
+		for(let j = i + 1; j < len; j++) {
 			if(arr[j] < arr[i]) {
 				count++;
 			}
@@ -22,19 +21,17 @@ function isValid(arr) { //判断数列的逆序是否为偶数  偶数=>有解
 	return count % 2 === 0;
 }
 
-window.onload = function() {
+window.onload = ()=>{
 	const jigsawW = Math.min((window.innerWidth/4 - 2.5)|0, 194);
 	jigsawview.style.height = (4* jigsawW + 2) + 'px';
 	jigsawview.style.width = (4* jigsawW + 2) + 'px';
 	Controller.style.left = (2* jigsawW - 75) + 'px';
 	Controller.style.top = (2* jigsawW - 75) + 'px';
 	Controller.style.display = "none";
-	let detime = 0;
-	let imgpath = "<img src='images" + ~~(Math.random() * 5) + "/img";
+	let detime = 0, imgpath = "<img src='images" + ~~(Math.random() * 5) + "/img";
 	const pstArr = (new Array(16).fill(0)).map((i,j)=>(Array(2).join(0) + j.toString(4)).slice(-2));
 	const last = window.jigsaw33;
-
-	function jigsawInit(i){//初始化拼图位置和宽高
+	const jigsawInit = i => {//初始化拼图位置和宽高
 		const thisJigsaw = window['jigsaw' + i];
 		thisJigsaw.style.height = (jigsawW - 2) + 'px';
 		thisJigsaw.style.width = (jigsawW - 2) + 'px';
@@ -73,7 +70,7 @@ window.onload = function() {
 				this.style.opacity = 0.3;
 				last.style.opacity = 1;
 				const that = this;
-				setTimeout(function() {
+				setTimeout(()=>{
 					that.style.opacity = 1;
 					last.style.opacity = 0.2;
 				}, 250);
@@ -81,23 +78,41 @@ window.onload = function() {
 		}
 	}
 
-	btn.onclick = function() {
-		let newPstArr = [...pstArr]; //获取拷贝
+	btn.onclick = ()=>{
+        btn.onclick = null;
+        Controller.style.display = "none";
+		let newPstArr = [...pstArr], allpromise = [];
 		newPstArr.pop(); //弹出最后一个
-		do {
+		do{
 			newPstArr = shuffle(newPstArr);
 		}
 		while(!isValid(newPstArr)); //直到它有解
 		newPstArr.push('33'); //插入最后一个
 		for(let [i,v] of Object.entries(newPstArr)){
 			let thisJigsaw = window['jigsaw' + pstArr[i]];
-			thisJigsaw.style.top = 0 + 'px';
-			thisJigsaw.style.left = 0 + 'px';
-			setTimeout(function() {
-				thisJigsaw.pro.pst = v;
-			}, 500);
+            allpromise.push(new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    thisJigsaw.pro.pst = '00';
+                    resolve([thisJigsaw, v]);
+                }, 100*i);
+            }));
 		}
-		Controller.style.display = "none";
-        window.r = new Date();
+        Promise.all(allpromise).then(res =>{
+            allpromise = [];
+            for(let i of res){
+                allpromise.push(new Promise((resolve,reject)=>{
+                    setTimeout(function(){
+                        i[0].pro.pst = i[1];
+                    }, 100*(20 - pstArr.indexOf(i[1])));
+                }));
+            }
+        });
+        Promise.all(allpromise).then(res =>{
+            new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    window.r = new Date();
+                });
+            });
+        });
 	}
 }
