@@ -50,7 +50,7 @@ addLoadEvent(function() {
 	Controller.style.left = (2 * jigsawW - 75) + 'px'
 	Controller.style.top = (2 * jigsawW - 75) + 'px'
 
-	let imgpath = "<img src='images" + Math.floor(Math.random() * 5) + "/img";
+	const imgpath = "<img src='img/img";
 	Controller.style.display = "none"
 	let detime = 0
 	const pstArr = [0, 1, 2, 3, 10, 11, 12, 13, 20, 21, 22, 23, 30, 31, 32, 33] //每个方块的pst值构成的数组
