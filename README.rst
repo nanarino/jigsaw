@@ -9,8 +9,10 @@ nanarino jigsaw
 Clone-run
 =========
 
+::
+    # 安装依赖
     pnpm i
-
+    # 运行开发服务器
     npx vite
 
 
