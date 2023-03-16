@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  #jigsawview {
+    box-sizing: content-box;
+    position: relative;
+    margin: 0 auto;
+    background-color: black;
+
+    .jigsaw {
+      box-sizing: content-box;
+      border: 2px solid black;
+      position: absolute;
+      transition: 0.4s;
+      z-index: 2;
+    }
+
+    #jigsaw33 {
+      box-sizing: content-box;
+      border-color: transparent;
+      opacity: 0.2;
+      z-index: 1;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
