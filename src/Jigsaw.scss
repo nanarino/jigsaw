@@ -18,8 +18,11 @@ body {
 
       &:last-of-type {
         border-color: transparent;
-        opacity: 0.2;
         z-index: 1;
+
+        img {
+          animation: ani 6s ease-in-out infinite alternate;
+        }
       }
 
       img {
@@ -27,5 +30,22 @@ body {
         height: 100%;
       }
     }
+  }
+}
+
+@keyframes ani {
+  0% {
+    filter: blur(0);
+    opacity: .3;
+  }
+
+  50% {
+    filter: blur(3px);
+    opacity: .7;
+  }
+
+  100% {
+    filter: blur(0);
+    opacity: .3;
   }
 }
