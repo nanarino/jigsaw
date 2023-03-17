@@ -4,7 +4,9 @@ nanarino jigsaw
 
 一个传统拼图游戏的demo。
 
-刚接触js的时候的作品。现在用``SolidJS``浅浅的重构一下。
+刚接触js的时候的作品。现在用 ``SolidJS`` 浅浅的重构一下。
+
+原 ``jigsaw`` 目录保留目录名作为新的静态资源目录
 
 
 Clone-run
