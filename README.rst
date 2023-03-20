@@ -6,11 +6,11 @@ nanarino jigsaw
 
 刚接触js的时候的作品。现在用 ``SolidJS`` 浅浅的重构一下。
 
-原 ``jigsaw`` 目录保留目录名作为新的静态资源目录
+原 ``jigsaw`` 目录保留作为新的静态资源目录
 
 
-Clone-run
-=========
+Clone
+=====
 ::
 
     # 安装依赖
@@ -20,7 +20,7 @@ Clone-run
 
 
 
-Page-build
-==========
+Page
+====
 
-https://nanarino.github.io/jigsaw/
+旧版本预览： https://nanarino.github.io/jigsaw/
