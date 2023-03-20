@@ -1,38 +1,38 @@
-import { Component, createSignal, Index, createEffect, untrack, on } from 'solid-js';
-import './Jigsaw.scss';
-import Alert from './Alert';
-import { state, setState } from './store';
-import type { pst } from './tools';
-import { shuffle, isValid } from './tools';
+import { Component, createSignal, Index, createEffect, untrack, on } from 'solid-js'
+import './Jigsaw.scss'
+import Alert from './Alert'
+import { state, setState } from './store'
+import type { pst } from './tools'
+import { shuffle, isValid } from './tools'
 
 
 const LAST = 15
 const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => ('0' + j.toString(4)).slice(-2)) as pst[]
-const orgArray: pst[] = getInitPstArray();
+const orgArray: pst[] = getInitPstArray()
 
 
 const Jigsaw: Component = () => {
 
   // init
-  const openSign = createSignal(false);
-  const [getMessage, setMessage] = createSignal('Are you OK?');
-  const width: number = Math.min((window.innerWidth / 4 - 2.5) | 0, 194);
-  setState({ width });
-  const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false });
+  const openSign = createSignal(false)
+  const [getMessage, setMessage] = createSignal('Are you OK?')
+  const width: number = Math.min((window.innerWidth / 4 - 2.5) | 0, 194)
+  setState({ width })
+  const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
 
 
   // Start
-  const [getStep, setStep] = createSignal(-2);
+  const [getStep, setStep] = createSignal(-2)
   createEffect(() => {
     if (getStep() === -1) { // when step: -1 -> 0
-      openSign[1](true);
+      openSign[1](true)
     }
   })
   createEffect(on(openSign[0], () => {
     if (openSign[0]() === false) { // when step: true -> false
       do {
         setPstArray(shuffle)
-      } while (!isValid(getPstArray()));
+      } while (!isValid(getPstArray()))
       setStep(0)
     }
   }, { defer: true }))
@@ -44,8 +44,8 @@ const Jigsaw: Component = () => {
       for (const [index, thisPst] of Object.entries(untrack(getPstArray))) {
         if (thisPst !== orgArray[index]) return
       }
-      setMessage('All Clear');
-      openSign[1](true);
+      setMessage('All Clear')
+      openSign[1](true)
     }
   })
 
@@ -66,13 +66,13 @@ const Jigsaw: Component = () => {
               "pointer-events": (openSign[0]() ? "none" : "auto")
             }} onClick={
               () => {
-                const lastPstNum = +getPstArray()[LAST];
-                const thisPstNum = +getPstArray()[THIS];
+                const lastPstNum = +getPstArray()[LAST]
+                const thisPstNum = +getPstArray()[THIS]
                 if (LAST !== THIS && [10, -10, 1, -1].includes(lastPstNum - thisPstNum)) {
                   setPstArray(now => (
                     [now[LAST], now[THIS]] = [now[THIS], now[LAST]], now
                   ))
-                  setStep(step => ++step);
+                  setStep(step => ++step)
                 }
               }
             }>
@@ -83,7 +83,7 @@ const Jigsaw: Component = () => {
       </Index>
       <Alert openSign={openSign} message={getMessage()} />
     </div>
-  );
-};
+  )
+}
 
-export default Jigsaw;
+export default Jigsaw
