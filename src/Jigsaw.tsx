@@ -66,17 +66,18 @@ const Jigsaw: Component = () => {
               "pointer-events": (openSign[0]() ? "none" : "auto")
             }} onClick={
               () => {
-                const lastPstNum = +getPstArray()[LAST]
-                const thisPstNum = +getPstArray()[THIS]
-                if (LAST !== THIS && [10, -10, 1, -1].includes(lastPstNum - thisPstNum)) {
-                  setPstArray(now => (
-                    [now[LAST], now[THIS]] = [now[THIS], now[LAST]], now
-                  ))
-                  setStep(step => ++step)
+                if (LAST !== THIS) {
+                  const step = Math.abs((+getPstArray()[LAST]) - (+getPstArray()[THIS]))
+                  if ([10, 1].includes(step)) {
+                    setPstArray(now => (
+                      [now[LAST], now[THIS]] = [now[THIS], now[LAST]], now
+                    ))
+                    setStep(step => ++step)
+                  }
                 }
               }
             }>
-              <img src={`./../jigsaw/img${state.imgGroupIndex}/img${orgArray[THIS]}.jpg`} />
+              <img src={`./../jigsaw/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
             </div>
           )
         }
