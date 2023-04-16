@@ -6,6 +6,9 @@ nanarino jigsaw
 
 刚接触js的时候的作品。现在用 ``SolidJS`` 浅浅的重构一下。
 
+.. image:: ./jigsaw/logo.svg
+    :alt: SolidJS Logo
+
 原 ``jigsaw`` 目录保留作为新的静态资源目录
 
 
