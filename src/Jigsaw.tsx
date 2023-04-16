@@ -14,10 +14,9 @@ const orgArray: pst[] = getInitPstArray()
 const Jigsaw: Component = () => {
 
   // init
+  const { width } = state
   const [getSign, setSign] = createSignal(false)
   const [getMessage, setMessage] = createSignal('Are you OK?')
-  const width: number = Math.min(((window.innerWidth - 5) / 4) | 0, 195)
-  setState({ width })
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
   function shuffleJigsaw() {
     do {
