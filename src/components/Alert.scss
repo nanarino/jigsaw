@@ -1,25 +1,27 @@
 div#alert-box {
-  box-sizing: content-box;
   position: absolute;
-  top: 313px;
-  left: 313px;
-  width: 110px;
-  height: 110px;
-  padding: 20px;
-  border-radius: 50%;
-  background-color: lightpink;
   z-index: 3;
+  inset: 0;
+  margin: auto;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border-radius: 50%;
+  background-color: #00ffffaa;
+  backdrop-filter: blur(24px);
+  mix-blend-mode: difference;
 
   p {
-    box-sizing: content-box;
-    margin-top: 20px;
-    margin-left: 10px;
+    margin: 0;
+    mix-blend-mode: darken;
   }
 
   button {
-    box-sizing: content-box;
-    position: absolute;
-    top: 81px;
-    left: 51px;
+    background: yellow;
+    border: none;
   }
 }

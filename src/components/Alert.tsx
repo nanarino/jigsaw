@@ -13,11 +13,18 @@ export default function Alert(props: {
   const [getOpenSign, setOpenSign] = props.openSign
   return (<Show when={getOpenSign()}>
     <div id="alert-box" style={{
-      left: (2 * width - 75) + 'px',
-      top: (2 * width - 75) + 'px',
+      width: width * Math.sqrt(2) + 'px',
+      height: width * Math.sqrt(2) + 'px',
+      padding: width / 10 + 'px',
+      gap: width / 10 + 'px',
     }}>
-      <p>{props.message}</p>
-      <button onclick={async () => { // The default behavior is `setOpenSign(false)`
+      <p style={{
+        "font-size": `${width / 150}rem`
+      }}>{props.message}</p>
+      <button style={{
+        padding: `${width / 20}px ${width / 10}px`,
+        "border-radius": width / 50 + 'px',
+      }} onclick={async () => { // The default behavior is `setOpenSign(false)`
         if ((props.closeHook && await props.closeHook()) === false) return
         setOpenSign(false)
       }}>yes</button>
