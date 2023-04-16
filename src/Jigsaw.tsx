@@ -2,7 +2,7 @@ import { Component, createSignal, Index, createEffect, on } from 'solid-js'
 import './Jigsaw.scss'
 import Alert from './components/Alert'
 import { state, setState } from './store'
-import type { idx, pst } from './type'
+import type { idx, pst, hook } from './type'
 import { shuffle, isValid } from './util'
 
 
@@ -24,7 +24,7 @@ const Jigsaw: Component = () => {
       setPstArray(shuffle)
     } while (!isValid(getPstArray()))
   }
-  const [getCloseHook, bindCloseHook] = createSignal(shuffleJigsaw)
+  const [getCloseHook, bindCloseHook] = createSignal<hook>(shuffleJigsaw)
 
 
   // Start

@@ -2,11 +2,12 @@ import './Alert.scss'
 import { state } from '../store'
 import { Show } from 'solid-js'
 import type { Signal } from 'solid-js'
+import type { hook } from '../type'
 
 export default function Alert(props: {
   openSign: Signal<boolean>
   message: string
-  closeHook?: () => void | Promise<void | false> | false
+  closeHook?: hook
 }) {
   const { width } = state
   const [getOpenSign, setOpenSign] = props.openSign
