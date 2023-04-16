@@ -1,6 +1,6 @@
 import { Component, createSignal, Index, createEffect, untrack, on } from 'solid-js'
 import './Jigsaw.scss'
-import Alert from './Alert'
+import Alert from './components/Alert'
 import { state, setState } from './store'
 import type { pst } from './tools'
 import { shuffle, isValid } from './tools'
@@ -16,7 +16,7 @@ const Jigsaw: Component = () => {
   // init
   const openSign = createSignal(false)
   const [getMessage, setMessage] = createSignal('Are you OK?')
-  const width: number = Math.min((window.innerWidth / 4 - 2.5) | 0, 194)
+  const width: number = Math.min(((window.innerWidth - 5) / 4) | 0, 195)
   setState({ width })
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
 
@@ -52,15 +52,15 @@ const Jigsaw: Component = () => {
 
   return (
     <div id="jigsawview" style={{
-      width: (4 * width + 2) + 'px',
-      height: (4 * width + 2) + 'px',
-    }}>
+      width: (4 * width + 1) + 'px',
+      height: (4 * width + 1) + 'px',
+    }} onselect={() => false}>
       <Index each={getPstArray()}>
         {
           (getPst, THIS) => (
             <div class="jigsaw" style={{
-              width: (width - 2) + 'px',
-              height: (width - 2) + 'px',
+              width: `${width}px`,
+              height: `${width}px`,
               top: (width * (+getPst()[0])) + 'px',
               left: (width * (+getPst()[1])) + 'px',
               "pointer-events": (openSign[0]() ? "none" : "auto")
@@ -77,7 +77,7 @@ const Jigsaw: Component = () => {
                 }
               }
             }>
-              <img src={`./../jigsaw/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
+              <img draggable={false} src={`./../jigsaw/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
             </div>
           )
         }

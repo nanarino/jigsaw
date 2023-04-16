@@ -1,26 +1,38 @@
+.black-border-left-top {
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.black-border-right-bottom {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+
 body {
   margin: 0;
   padding: 0;
 
   #jigsawview {
-    box-sizing: content-box;
+    box-sizing: border-box;
     position: relative;
     margin: 0 auto;
     background-color: black;
+    @extend .black-border-left-top;
 
     .jigsaw {
       overflow: hidden;
-      box-sizing: content-box;
-      border: 2px solid black;
+      box-sizing: border-box;
       position: absolute;
       transition: 0.4s;
       z-index: 2;
+      @extend .black-border-right-bottom;
 
       &:last-of-type {
-        border-color: transparent;
         z-index: 1;
 
         img {
+          @extend .black-border-left-top;
           animation: ani 6s ease-in-out infinite alternate;
         }
       }
@@ -29,6 +41,11 @@ body {
         width: 100%;
         height: 100%;
       }
+    }
+
+    &:active>.jigsaw:last-of-type {
+      filter: blur(5px);
+      background-color: aqua;
     }
   }
 }
@@ -40,7 +57,7 @@ body {
   }
 
   50% {
-    filter: blur(3px);
+    filter: blur(5px);
     opacity: .7;
   }
 

@@ -1,5 +1,5 @@
 import './Alert.scss'
-import { state } from './store'
+import { state } from '../store'
 import { Show } from 'solid-js'
 import type { Signal } from 'solid-js'
 
