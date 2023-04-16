@@ -1,4 +1,4 @@
-export type pst = `${0 | 1 | 2 | 3}${0 | 1 | 2 | 3}`
+import type { pst } from './type'
 
 export function shuffle<T>(arr: T[]): T[] { //打乱数组
   const len = arr.length

@@ -1,9 +1,9 @@
-import { Component, createSignal, Index, createEffect, untrack, on } from 'solid-js'
+import { Component, createSignal, Index, createEffect, on } from 'solid-js'
 import './Jigsaw.scss'
 import Alert from './components/Alert'
 import { state, setState } from './store'
-import type { pst } from './tools'
-import { shuffle, isValid } from './tools'
+import type { idx, pst } from './type'
+import { shuffle, isValid } from './util'
 
 
 const LAST = 15
@@ -14,41 +14,41 @@ const orgArray: pst[] = getInitPstArray()
 const Jigsaw: Component = () => {
 
   // init
-  const openSign = createSignal(false)
+  const [getSign, setSign] = createSignal(false)
   const [getMessage, setMessage] = createSignal('Are you OK?')
   const width: number = Math.min(((window.innerWidth - 5) / 4) | 0, 195)
   setState({ width })
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
+  function shuffleJigsaw() {
+    do {
+      setPstArray(shuffle)
+    } while (!isValid(getPstArray()))
+  }
+  const [getCloseHook, bindCloseHook] = createSignal(shuffleJigsaw)
 
 
   // Start
   const [getStep, setStep] = createSignal(-2)
-  createEffect(() => {
-    if (getStep() === -1) { // when step: -1 -> 0
-      openSign[1](true)
+  createEffect(on(getStep, step => {
+    if (step === -1) {
+      bindCloseHook(() => shuffleJigsaw)
+      setSign(true)
+      return
     }
-  })
-  createEffect(on(openSign[0], () => {
-    if (openSign[0]() === false) { // when step: true -> false
-      do {
-        setPstArray(shuffle)
-      } while (!isValid(getPstArray()))
-      setStep(0)
-    }
-  }, { defer: true }))
-
-
-  // Win
-  createEffect(() => {
-    if (getStep() > 0) {
-      for (const [index, thisPst] of Object.entries(untrack(getPstArray))) {
+    if (step > 0) {
+      for (const [index, thisPst] of Object.entries(getPstArray())) {
         if (thisPst !== orgArray[index]) return
       }
-      setMessage('All Clear')
-      openSign[1](true)
+      // when clear the game
+      setMessage(`${step} steps to clear`)
+      bindCloseHook(() => () => {
+        setMessage('Are you OK?')
+        setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
+        setStep(-2)
+      })
+      setSign(true)
     }
-  })
-
+  }))
 
   return (
     <div id="jigsawview" style={{
@@ -63,7 +63,7 @@ const Jigsaw: Component = () => {
               height: `${width}px`,
               top: (width * (+getPst()[0])) + 'px',
               left: (width * (+getPst()[1])) + 'px',
-              "pointer-events": (openSign[0]() ? "none" : "auto")
+              "pointer-events": (getSign() ? "none" : "auto")
             }} onClick={
               () => {
                 if (LAST !== THIS) {
@@ -82,7 +82,7 @@ const Jigsaw: Component = () => {
           )
         }
       </Index>
-      <Alert openSign={openSign} message={getMessage()} />
+      <Alert openSign={[getSign, setSign]} message={getMessage()} closeHook={getCloseHook()} />
     </div>
   )
 }
