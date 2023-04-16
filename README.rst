@@ -9,6 +9,7 @@ nanarino jigsaw
 .. image:: ./jigsaw/logo.svg
     :width: 96 px
     :alt: SolidJS Logo
+    :target: https://www.solidjs.com/
 
 原 ``jigsaw`` 目录保留作为新的静态资源目录
 
