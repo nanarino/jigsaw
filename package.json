@@ -1,6 +1,6 @@
 {
   "name": "jigsaw",
-  "version": "2023.3.16",
+  "version": "2023.4.16",
   "description": "",
   "scripts": {
     "dev": "vite",
@@ -9,12 +9,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "sass": "^1.58.0",
+    "sass": "^1.62.0",
     "typescript": "^4.9.5",
-    "vite": "^4.1.1",
-    "vite-plugin-solid": "^2.5.0"
+    "vite": "^4.2.1",
+    "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
-    "solid-js": "^1.6.10"
+    "solid-js": "^1.7.3"
   }
 }
