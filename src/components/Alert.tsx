@@ -5,13 +5,21 @@ import type { Signal } from 'solid-js'
 import type { hook } from '../type'
 
 export default function Alert(props: {
-  openSign: Signal<boolean>
+  show: Signal<boolean>
   message: string
-  closeHook?: hook
+  /**
+   * Default behavior is to hide the popup, unless `event.preventDefault()` or `return false`
+   */
+  onClose?: hook
 }) {
   const { width } = state
-  const [getOpenSign, setOpenSign] = props.openSign
-  return (<Show when={getOpenSign()}>
+  const [getOpen, setOpen] = props.show
+  const close = async (e: Event) => {
+    if ((props.onClose && await props.onClose(e)) === false) return
+    if (e.defaultPrevented) return
+    setOpen(false)
+  }
+  return (<Show when={getOpen()}>
     <div id="alert-box" style={{
       width: width * Math.sqrt(2) + 'px',
       height: width * Math.sqrt(2) + 'px',
@@ -24,10 +32,7 @@ export default function Alert(props: {
       <button style={{
         padding: `${width / 20}px ${width / 10}px`,
         "border-radius": width / 50 + 'px',
-      }} onclick={async () => { // The default behavior is `setOpenSign(false)`
-        if ((props.closeHook && await props.closeHook()) === false) return
-        setOpenSign(false)
-      }}>yes</button>
+      }} onclick={close}>yes</button>
     </div>
   </Show>)
 }

@@ -6,8 +6,13 @@ import type { idx, pst, hook } from './type'
 import { shuffle, isValid } from './util'
 
 
-const LAST = 15
-const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => ('0' + j.toString(4)).slice(-2)) as pst[]
+/**
+ * Reduce difficulty to test
+ */
+// setState({ ORDER: 2 })
+const { ORDER } = state
+const LAST = ORDER ** 2 - 1
+const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => j.toString(ORDER).padStart(2, '0')) as pst[]
 const orgArray: pst[] = getInitPstArray()
 
 
@@ -15,13 +20,21 @@ const Jigsaw: Component = () => {
 
   // init
   const { width } = state
-  const [getSign, setSign] = createSignal(false)
+  const [getAlertIsOpen, setAlertIsOpen] = createSignal(false)
   const [getMessage, setMessage] = createSignal('Are you OK?')
+  /**
+   * **This saves which hole the square is in, not the number of the square in each hole**
+   * 
+   * `getPstArray().at(LAST)` =>  **The hole where the empty square is**
+   * `getPstArray().indexOf('33')` =>  **which square in the last hole**
+   * 
+   *  hole does not exist
+   */
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
   function shuffleJigsaw() {
     do {
       setPstArray(shuffle)
-    } while (!isValid(getPstArray()))
+    } while (!isValid(getPstArray(), { width: ORDER, height: ORDER }))
   }
   const [getCloseHook, bindCloseHook] = createSignal<hook>(shuffleJigsaw)
 
@@ -29,9 +42,9 @@ const Jigsaw: Component = () => {
   // Start
   const [getStep, setStep] = createSignal(-2)
   createEffect(on(getStep, step => {
-    if (step === -1) {
+    if (step === 0) {
       bindCloseHook(() => shuffleJigsaw)
-      setSign(true)
+      setAlertIsOpen(true)
       return
     }
     if (step > 0) {
@@ -40,19 +53,20 @@ const Jigsaw: Component = () => {
       }
       // when clear the game
       setMessage(`${step} steps to clear`)
-      bindCloseHook(() => () => {
-        setMessage('Are you OK?')
+      bindCloseHook(() => (e: Event) => {
+        //e.preventDefault()
         setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
+        setMessage('Are you OK?')
         setStep(-2)
       })
-      setSign(true)
+      setAlertIsOpen(true)
     }
   }))
 
   return (
     <div id="jigsawview" style={{
-      width: (4 * width + 1) + 'px',
-      height: (4 * width + 1) + 'px',
+      width: (ORDER * width + 1) + 'px',
+      height: (ORDER * width + 1) + 'px',
     }} onselect={() => false}>
       <Index each={getPstArray()}>
         {
@@ -62,12 +76,11 @@ const Jigsaw: Component = () => {
               height: `${width}px`,
               top: (width * (+getPst()[0])) + 'px',
               left: (width * (+getPst()[1])) + 'px',
-              "pointer-events": (getSign() ? "none" : "auto")
+              "pointer-events": (getAlertIsOpen() ? "none" : "auto")
             }} onClick={
               () => {
                 if (LAST !== THIS) {
-                  const step = Math.abs((+getPstArray()[LAST]) - (+getPstArray()[THIS]))
-                  if ([10, 1].includes(step)) {
+                  if ([10, 1].includes(Math.abs((+getPstArray()[LAST]) - (+getPstArray()[THIS])))) {
                     setPstArray(now => (
                       [now[LAST], now[THIS]] = [now[THIS], now[LAST]], now
                     ))
@@ -81,7 +94,7 @@ const Jigsaw: Component = () => {
           )
         }
       </Index>
-      <Alert openSign={[getSign, setSign]} message={getMessage()} closeHook={getCloseHook()} />
+      <Alert show={[getAlertIsOpen, setAlertIsOpen]} message={getMessage()} onClose={getCloseHook()} />
     </div>
   )
 }
