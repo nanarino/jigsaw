@@ -12,7 +12,6 @@ export function shuffle<T>(arr: T[]): T[] {
 /**
  * 
  * @param arr the arr.length = width * height,
- *     the arr.length = width * height,
  *     For this project, it's interval `<Trinary🥺>['00', '01', ..., '33']`
  * 
  * @param jigsaw Since more than decimal will be format by letters
@@ -20,7 +19,7 @@ export function shuffle<T>(arr: T[]): T[] {
  *     For this project, it's `{width: 4, height: 4}`
  * 
  * @returns it was supposed to be inversion number, 
- *     But moved time of the empty squares is also taken into `(inversion number % 2) === (moved time % 2)` 🤔
+ *     But moved times of the empty squares is also taken into `(inversion number % 2) === (moved time % 2)` 🤔
  */
 export const isValid = (arr: string[], jigsaw: { width: number, height: number }) => {
   const { width, height } = jigsaw
