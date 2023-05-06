@@ -89,7 +89,7 @@ const Jigsaw: Component = () => {
                 }
               }
             }>
-              <img draggable={false} src={`./../jigsaw/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
+              <img draggable={false} src={`/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
             </div>
           )
         }
