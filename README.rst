@@ -25,7 +25,14 @@ Clone
 
 
 
-Page
-====
+Build Page
+==========
+::
 
-旧版本预览： https://nanarino.github.io/jigsaw/
+    # 打包
+    npx vite build
+    cp -r ./jigsaw ./dist/jigsaw
+
+
+新版本预览(Solid实现17.9kB)： https://nanarino.github.io/jigsaw/
+旧版本预览(原生实现4.02kB)： https://nanarino.github.io/jigsaw/old/
