@@ -1,4 +1,5 @@
-import { Component, createSignal, Index, createEffect, on } from 'solid-js'
+import { createSignal, Index, createEffect, on } from 'solid-js'
+import type { Component } from 'solid-js'
 import './Jigsaw.scss'
 import Alert from './components/Alert'
 import { state, setState } from './store'
@@ -16,8 +17,7 @@ const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => j.toSt
 const orgArray: pst[] = getInitPstArray()
 
 
-const Jigsaw: Component = () => {
-
+export default (() => {
   // init
   const { width } = state
   const [getAlertIsOpen, setAlertIsOpen] = createSignal(false)
@@ -89,7 +89,7 @@ const Jigsaw: Component = () => {
                 }
               }
             }>
-              <img draggable={false} src={`${import.meta.env.BASE_URL.replace(/\/$/,'')}/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
+              <img draggable={false} src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
             </div>
           )
         }
@@ -97,6 +97,4 @@ const Jigsaw: Component = () => {
       <Alert show={[getAlertIsOpen, setAlertIsOpen]} message={getMessage()} onClose={getCloseHook()} />
     </div>
   )
-}
-
-export default Jigsaw
+}) as Component

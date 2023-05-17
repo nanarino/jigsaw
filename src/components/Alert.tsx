@@ -1,17 +1,19 @@
 import './Alert.scss'
 import { state } from '../store'
 import { Show } from 'solid-js'
-import type { Signal } from 'solid-js'
+import type { Component, Signal } from 'solid-js'
 import type { hook } from '../type'
 
-export default function Alert(props: {
+type attr = {
   show: Signal<boolean>
   message: string
   /**
    * Default behavior is to hide the popup, unless `event.preventDefault()` or `return false`
    */
   onClose?: hook
-}) {
+}
+
+export default ((props: attr) => {
   const { width } = state
   const [getOpen, setOpen] = props.show
   const close = async (e: Event) => {
@@ -35,4 +37,4 @@ export default function Alert(props: {
       }} onclick={close}>yes</button>
     </div>
   </Show>)
-}
+}) as Component<attr>
