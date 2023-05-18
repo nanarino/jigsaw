@@ -2,7 +2,7 @@ import './Alert.scss'
 import { state } from '../store'
 import { Show } from 'solid-js'
 import type { Component, Signal } from 'solid-js'
-import type { hook } from '../type'
+import type { handle } from '../type'
 
 type attr = {
   show: Signal<boolean>
@@ -10,7 +10,7 @@ type attr = {
   /**
    * Default behavior is to hide the popup, unless `event.preventDefault()` or `return false`
    */
-  onClose?: hook
+  onClose?: handle
 }
 
 export default ((props: attr) => {

@@ -3,7 +3,7 @@ import type { Component } from 'solid-js'
 import './Jigsaw.scss'
 import Alert from './components/Alert'
 import { state, setState } from './store'
-import type { idx, pst, hook } from './type'
+import type { idx, pst, handle } from './type'
 import { shuffle, isValid } from './util'
 
 
@@ -36,14 +36,14 @@ export default (() => {
       setPstArray(shuffle)
     } while (!isValid(getPstArray(), { width: ORDER, height: ORDER }))
   }
-  const [getCloseHook, bindCloseHook] = createSignal<hook>(shuffleJigsaw)
+  const [getHandleClose, bindHandleClose] = createSignal<handle>(shuffleJigsaw)
 
 
   // Start
   const [getStep, setStep] = createSignal(-2)
   createEffect(on(getStep, step => {
     if (step === 0) {
-      bindCloseHook(() => shuffleJigsaw)
+      bindHandleClose(() => shuffleJigsaw)
       setAlertIsOpen(true)
       return
     }
@@ -53,7 +53,7 @@ export default (() => {
       }
       // when clear the game
       setMessage(`${step} steps to clear`)
-      bindCloseHook(() => (e: Event) => {
+      bindHandleClose(() => (e: Event) => {
         //e.preventDefault()
         setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
         setMessage('Are you OK?')
@@ -94,7 +94,7 @@ export default (() => {
           )
         }
       </Index>
-      <Alert show={[getAlertIsOpen, setAlertIsOpen]} message={getMessage()} onClose={getCloseHook()} />
+      <Alert show={[getAlertIsOpen, setAlertIsOpen]} message={getMessage()} onClose={getHandleClose()} />
     </div>
   )
 }) as Component
