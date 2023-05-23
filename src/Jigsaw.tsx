@@ -89,7 +89,7 @@ export default (() => {
                 }
               }
             }>
-              <img draggable={false} src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
+              <img draggable={false} src={`${import.meta.env.BASE_URL}img${state.imgPackageIndex}/img${orgArray[THIS]}.jpg`} />
             </div>
           )
         }
