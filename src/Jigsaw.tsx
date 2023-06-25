@@ -31,7 +31,7 @@ export default (() => {
    *  hole does not exist
    */
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), { equals: false })
-  function shuffleJigsaw() {
+  function shuffleJigsaw(e: Event) {
     do {
       setPstArray(shuffle)
     } while (!isValid(getPstArray(), { width: ORDER, height: ORDER }))
@@ -47,14 +47,13 @@ export default (() => {
       setAlertIsOpen(true)
       return
     }
-    if (step > 0) {
+    else if (step > 0) {
       for (const [index, thisPst] of Object.entries(getPstArray())) {
         if (thisPst !== orgArray[index]) return
       }
       // when clear the game
       setMessage(`${step} steps to clear`)
       bindHandleClose(() => (e: Event) => {
-        //e.preventDefault()
         setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
         setMessage('Are you OK?')
         setStep(-2)
