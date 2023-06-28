@@ -13,6 +13,8 @@ nanarino jigsaw
 
 原 ``jigsaw`` 目录保留作为新的静态资源目录
 
+.. highlight:: bash
+
 
 Clone
 =====
