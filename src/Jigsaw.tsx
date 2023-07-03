@@ -15,13 +15,13 @@ const { ORDER } = state
 const LAST = ORDER ** 2 - 1
 const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => j.toString(ORDER).padStart(2, '0')) as pst[]
 const orgArray: pst[] = getInitPstArray()
-
+const DEFAULT_MESSAGE = 'Are you OK?'
 
 export default (() => {
   // init
   const { width } = state
   const [getAlertIsOpen, setAlertIsOpen] = createSignal(false)
-  const [getMessage, setMessage] = createSignal('Are you OK?')
+  const [getMessage, setMessage] = createSignal(DEFAULT_MESSAGE)
   /**
    * **This saves which hole the square is in, not the number of the square in each hole**
    * 
@@ -55,7 +55,7 @@ export default (() => {
       setMessage(`${step} steps to clear`)
       bindHandleClose(() => (e: Event) => {
         setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
-        setMessage('Are you OK?')
+        setMessage(DEFAULT_MESSAGE)
         setStep(-2)
       })
       setAlertIsOpen(true)
