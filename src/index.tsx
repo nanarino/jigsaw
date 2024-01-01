@@ -11,5 +11,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   )
 }
 
-setState({ width: Math.min(((window.innerWidth - 5) / 4) | 0, 195) })
+const resize = () => setState({ width: Math.min(((window.innerWidth - 5) / 4) | 0, 195) })
+resize()
+window.onresize = resize
 render(() => <Jigsaw />, root!)

@@ -14,7 +14,6 @@ type attr = {
 }
 
 export default ((props: attr) => {
-  const { width } = state
   const [getOpen, setOpen] = props.show
   const close = async (e: Event) => {
     if ((props.onClose && await props.onClose(e)) === false) return
@@ -23,17 +22,17 @@ export default ((props: attr) => {
   }
   return (<Show when={getOpen()}>
     <div id="alert-box" style={{
-      width: width * Math.sqrt(2) + 'px',
-      height: width * Math.sqrt(2) + 'px',
-      padding: width / 10 + 'px',
-      gap: width / 10 + 'px',
+      width: state.width * Math.sqrt(2) + 'px',
+      height: state.width * Math.sqrt(2) + 'px',
+      padding: state.width / 10 + 'px',
+      gap: state.width / 10 + 'px',
     }}>
       <p style={{
-        "font-size": `${width / 150}rem`
+        "font-size": `${state.width / 150}rem`
       }}>{props.message}</p>
       <button style={{
-        padding: `${width / 20}px ${width / 10}px`,
-        "border-radius": width / 50 + 'px',
+        padding: `${state.width / 20}px ${state.width / 10}px`,
+        "border-radius": state.width / 50 + 'px',
       }} onclick={close}>yes</button>
     </div>
   </Show>)

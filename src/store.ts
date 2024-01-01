@@ -1,10 +1,10 @@
 import { createStore } from "solid-js/store"
-import type { idx, order } from './type'
 
 export const [state, setState] = createStore<{
-  ORDER: order
+  ORDER: number
   width: number
-  imgPackageIndex: idx
+  imgPackageIndex: number
+  IMG_PACKAGE_LEN: number
 }>({
   /**
    * 4*4 square
@@ -14,5 +14,6 @@ export const [state, setState] = createStore<{
    * square width (px)
    */
   width: 100,
-  imgPackageIndex: ~~(Math.random() * 3) as idx
+  imgPackageIndex: ~~(Math.random() * 3),
+  IMG_PACKAGE_LEN: 3
 })

@@ -3,7 +3,7 @@ import type { Component } from 'solid-js'
 import './Jigsaw.scss'
 import Alert from './components/Alert'
 import { state, setState } from './store'
-import type { idx, pst, handle } from './type'
+import type { pst, handle } from './type'
 import { shuffle, isValid } from './util'
 
 
@@ -11,7 +11,7 @@ import { shuffle, isValid } from './util'
  * Reduce difficulty to test
  */
 // setState({ ORDER: 2 })
-const { ORDER } = state
+const { ORDER, IMG_PACKAGE_LEN } = state
 const LAST = ORDER ** 2 - 1
 const getInitPstArray = () => (new Array(LAST + 1).fill(0)).map((i, j) => j.toString(ORDER).padStart(2, '0')) as pst[]
 const orgArray: pst[] = getInitPstArray()
@@ -19,7 +19,6 @@ const DEFAULT_MESSAGE = 'Are you OK?'
 
 export default (() => {
   // init
-  const { width } = state
   const [getAlertIsOpen, setAlertIsOpen] = createSignal(false)
   const [getMessage, setMessage] = createSignal(DEFAULT_MESSAGE)
   /**
@@ -54,7 +53,7 @@ export default (() => {
       // when clear the game
       setMessage(`${step} steps to clear`)
       bindHandleClose(() => (e: Event) => {
-        setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % 3) as idx })
+        setState({ imgPackageIndex: ((state.imgPackageIndex + 1) % IMG_PACKAGE_LEN) })
         setMessage(DEFAULT_MESSAGE)
         setStep(-2)
       })
@@ -64,17 +63,17 @@ export default (() => {
 
   return (
     <div id="jigsawview" style={{
-      width: (ORDER * width + 1) + 'px',
-      height: (ORDER * width + 1) + 'px',
+      width: (ORDER * state.width + 1) + 'px',
+      height: (ORDER * state.width + 1) + 'px',
     }} onselect={() => false}>
       <Index each={getPstArray()}>
         {
           (getPst, THIS) => (
             <div class="jigsaw" style={{
-              width: `${width}px`,
-              height: `${width}px`,
-              top: (width * (+getPst()[0])) + 'px',
-              left: (width * (+getPst()[1])) + 'px',
+              width: `${state.width}px`,
+              height: `${state.width}px`,
+              top: (state.width * (+getPst()[0])) + 'px',
+              left: (state.width * (+getPst()[1])) + 'px',
               "pointer-events": (getAlertIsOpen() ? "none" : "auto")
             }} onClick={
               () => {
