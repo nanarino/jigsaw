@@ -10,13 +10,13 @@
     z-index 2
     &:last-of-type
       z-index 1
+      clip-path inset(1px 1px)
       img
         animation ani 6s ease-in-out infinite alternate
     img
       width 100%
       height 100%
   &:active > .jigsaw:last-of-type
-    filter blur(5px)
     background-color rgb(var(--primary-5))
 
 @keyframes ani

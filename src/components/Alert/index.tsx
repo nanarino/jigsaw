@@ -1,6 +1,6 @@
 import "./index.styl"
 import { state } from "@/store"
-import { Show } from "solid-js"
+import { Show, createSignal } from "solid-js"
 import type { Component, Signal } from "solid-js"
 import type { handle } from "@/type"
 
@@ -15,10 +15,13 @@ type attr = {
 
 export default ((props: attr) => {
   const [getOpen, setOpen] = props.show
+  const [getButtonDisabled, setButtonDisabled] = createSignal(false)
   const close = async (e: Event) => {
+    setButtonDisabled(true)
     if ((props.onClose && (await props.onClose(e))) === false) return
     if (e.defaultPrevented) return
     setOpen(false)
+    setButtonDisabled(false)
   }
   return (
     <Show when={getOpen()}>
@@ -46,6 +49,7 @@ export default ((props: attr) => {
             "border-radius": state.width / 50 + "px",
           }}
           onclick={close}
+          disabled={getButtonDisabled()}
         >
           yes
         </button>

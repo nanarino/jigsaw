@@ -4,7 +4,7 @@ import "./index.styl"
 import Alert from "@/components/Alert"
 import { state, setState } from "@/store"
 import type { pst, handle } from "@/type"
-import { shuffle, isValid } from "@/util"
+import { sleep, shuffle, isValid } from "@/util"
 
 /**
  * Reduce difficulty to test
@@ -34,10 +34,22 @@ export default (() => {
   const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), {
     equals: false,
   })
-  function shuffleJigsaw(e: Event) {
+  async function shuffleJigsaw(e: Event) {
+    const pstArray = getPstArray()
+    let shuffledPstArray: pst[]
     do {
-      setPstArray(shuffle)
-    } while (!isValid(getPstArray(), { width: ORDER, height: ORDER }))
+      shuffledPstArray = shuffle([...pstArray])
+    } while (!isValid(shuffledPstArray, { width: ORDER, height: ORDER }))
+    for (const i of Object.keys(pstArray)) {
+      await sleep(40)
+      pstArray[i] = "00"
+      setPstArray(pstArray)
+    }
+    for (const [i, pst] of Object.entries(shuffledPstArray)) {
+      await sleep(40)
+      pstArray[i] = pst
+      setPstArray(pstArray)
+    }
   }
   const [getHandleClose, bindHandleClose] = createSignal<handle>(shuffleJigsaw)
 

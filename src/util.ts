@@ -1,3 +1,7 @@
+export function sleep(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time))
+}
+
 export function shuffle<T>(arr: T[]): T[] {
   const len = arr.length
   for (let i = 0; i < len - 1; i++) {

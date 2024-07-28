@@ -4,7 +4,7 @@ nanarino jigsaw
 
 一個 `nanarinostyl <https://nanarino.github.io/nanarinostyl/>`_ 主題的 拼圖游戲 demo 。
 
-剛接觸 WEB 时嘅作品。而家用 ``SolidJS`` 淺淺地重構一下。
+剛接觸 WEB 個陣時嘅作品。而家用 ``SolidJS`` 淺淺地重構一下。
 
 .. image:: ./jigsaw/logo.svg
     :width: 96 px
