@@ -5,6 +5,10 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "types": ["vite/client"],

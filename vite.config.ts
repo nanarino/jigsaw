@@ -1,13 +1,8 @@
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
+import { defineConfig } from "vite"
+import solid from "vite-plugin-solid"
+import alias from "@holy-two/vite-plugin-alias"
 
 export default defineConfig({
-  plugins: [solidPlugin()],
-  server: {
-    port: 3000,
-  },
-  build: {
-    target: 'esnext',
-  },
-  publicDir: 'jigsaw',
-});
+  plugins: [solid(), alias()],
+  publicDir: "jigsaw",
+})

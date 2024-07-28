@@ -15,5 +15,5 @@ export const [state, setState] = createStore<{
    */
   width: 100,
   imgPackageIndex: ~~(Math.random() * 3),
-  IMG_PACKAGE_LEN: 3
+  IMG_PACKAGE_LEN: 3,
 })
