@@ -2,39 +2,37 @@
 nanarino jigsaw
 ===============
 
-一个传统拼图游戏的demo。
+一個 `nanarinostyl <https://nanarino.github.io/nanarinostyl/>`_ 主題的 拼圖游戲 demo 。
 
-刚接触js的时候的作品。现在用 ``SolidJS`` 浅浅的重构一下。
+剛接觸 WEB 时嘅作品。而家用 ``SolidJS`` 淺淺地重構一下。
 
 .. image:: ./jigsaw/logo.svg
     :width: 96 px
     :alt: SolidJS Logo
     :target: https://www.solidjs.com/
 
-原 ``jigsaw`` 目录保留作为新的静态资源目录
+原 ``jigsaw`` 目錄保留作爲 vite 的靜態資源目錄
 
 .. highlight:: bash
 
 
-Clone
-=====
+克隆
+=======
 ::
 
-    # 安装依赖
+    # 安裝依賴
     pnpm i
-    # 运行开发服务器
+    # 運行開發伺服器
     npx vite
 
 
-
-Build Page
-==========
+構建
+======
 ::
 
-    # 打包
     npx vite build
 
 
-新版本预览(Solid实现17.9kB)： https://nanarino.github.io/jigsaw/
-
-旧版本预览(原生实现4.02kB)： https://nanarino.github.io/jigsaw/old/
+預覽
+======
+https://nanarino.github.io/jigsaw/
