@@ -1,7 +1,7 @@
 /* @refresh reload */
 import "./index.styl"
 import { render } from "solid-js/web"
-import { setState } from "@/store"
+import { state, setState } from "@/store"
 import Jigsaw from "@/components/Jigsaw"
 import ThemeToggle from "@/components/ThemeToggle"
 
@@ -13,7 +13,14 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   )
 }
 
-const resize = () => setState({ width: Math.min(window.innerWidth, 776) / 4 })
+/**
+ * Reduce difficulty to test
+ */
+// setState({ ORDER: 2 })
+const resize = () =>
+  setState({
+    width: Math.min(window.innerWidth, window.innerHeight, 776) / state.ORDER,
+  })
 resize()
 window.onresize = resize
 render(

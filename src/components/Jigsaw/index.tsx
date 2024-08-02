@@ -6,10 +6,6 @@ import { state, setState } from "@/store"
 import type { pst, handle } from "@/type"
 import { sleep, shuffle, isValid } from "@/util"
 
-/**
- * Reduce difficulty to test
- */
-// setState({ ORDER: 2 })
 const { ORDER, IMG_PACKAGE_LEN } = state
 const LAST = ORDER ** 2 - 1
 const getInitPstArray = () =>

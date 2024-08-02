@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store"
 
 export const [state, setState] = createStore<{
-  ORDER: number
+  ORDER: 2 | 3 | 4
   width: number
   imgPackageIndex: number
   IMG_PACKAGE_LEN: number
