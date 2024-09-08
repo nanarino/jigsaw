@@ -13,6 +13,14 @@ nanarino jigsaw
 
 原 ``jigsaw`` 目錄保留作爲 vite 的靜態資源目錄
 
+.. image:: https://img.shields.io/badge/maintained%20with-pnpm%209.0-cc00ff.svg?style=for-the-badge&logo=pnpm
+    :alt: pnpm 9.0
+    :target: https://pnpm.io/
+
+.. image:: https://img.shields.io/badge/Node.js-v20.17.0-026e00.svg?style=for-the-badge&logo=nodedotjs
+    :alt: Node.js v20.17.0
+    :target: https://nodejs.org/
+
 .. highlight:: bash
 
 
