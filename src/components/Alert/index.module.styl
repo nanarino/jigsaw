@@ -1,13 +1,14 @@
 @import 'nanarinostyl/src/lib/variable/*'
 
-div#alert-box
+.dialog
   position absolute
-  display grid
   justify-items center
   align-items center
   box-sizing border-box
   border-radius 50%
   background-color rgb(var(--white) \/ 30%)
   backdrop-filter blur(24px)
+  &[open]
+    display grid
   p
     margin 0

@@ -1,9 +1,9 @@
 @import 'nanarinostyl/src/lib/variable/*'
 
-#jigsawview
+.view
   position relative
   margin 0 auto
-  .jigsaw
+  .item
     overflow hidden
     position absolute
     transition 0.4s
@@ -11,14 +11,9 @@
     &:last-of-type
       z-index 1
       clip-path inset(1px 1px)
-      img
-        animation ani 6s ease-in-out infinite alternate
-    img
-      width 100%
-      height 100%
-  &:active > .jigsaw:last-of-type
-    background-color rgb(var(--primary-5))
-
+      animation ani 6s ease-in-out infinite alternate
+  &:active > .item:last-of-type
+    clip-path inset(8px 8px)
 @keyframes ani
   0%
     filter blur(0)

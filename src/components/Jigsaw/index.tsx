@@ -1,6 +1,6 @@
 import { createSignal, Index, createEffect, on } from "solid-js"
 import type { Component } from "solid-js"
-import "./index.styl"
+import classes from "./index.module.styl"
 import Alert from "@/components/Alert"
 import { state, setState } from "@/store"
 import type { pst, handle } from "@/type"
@@ -77,7 +77,7 @@ export default (() => {
 
   return (
     <div
-      id="jigsawview"
+      class={classes.view}
       style={{
         width: `${ORDER * state.width}px`,
         height: `${ORDER * state.width}px`,
@@ -87,13 +87,16 @@ export default (() => {
       <Index each={getPstArray()}>
         {(getPst, THIS) => (
           <div
-            class="jigsaw"
+            class={`na-image ${classes.item}`}
             style={{
               width: `${state.width}px`,
               height: `${state.width}px`,
               top: `${state.width * +getPst()[0]}px`,
               left: `${state.width * +getPst()[1]}px`,
               "pointer-events": getAlertIsOpen() ? "none" : "auto",
+              "background-image": `url(${import.meta.env.BASE_URL}img${
+                state.imgPackageIndex
+              }/img${orgArray[THIS]}.jpg)`,
             }}
             onClick={() => {
               if (LAST !== THIS) {
@@ -111,18 +114,11 @@ export default (() => {
                 }
               }
             }}
-          >
-            <img
-              draggable={false}
-              src={`${import.meta.env.BASE_URL}img${state.imgPackageIndex}/img${
-                orgArray[THIS]
-              }.jpg`}
-            />
-          </div>
+          ></div>
         )}
       </Index>
       <Alert
-        show={[getAlertIsOpen, setAlertIsOpen]}
+        open={[getAlertIsOpen, setAlertIsOpen]}
         message={getMessage()}
         onClose={getHandleClose()}
       />

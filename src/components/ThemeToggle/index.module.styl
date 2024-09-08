@@ -1,4 +1,4 @@
-#themeToggle
+.button
   z-index 9
   position fixed
   bottom 16px
@@ -10,11 +10,9 @@
     transition opacity 0.3s
     width 24px
     height 24px
-:root[data-theme='light']
-  #themeToggle
+  /:root[data-theme='light'] &
     svg:first-child
       opacity 0
-:root[data-theme='dark']
-  #themeToggle
+  /:root[data-theme='dark'] &
     svg:last-child
       opacity 0

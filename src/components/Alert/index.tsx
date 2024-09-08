@@ -1,11 +1,11 @@
-import "./index.styl"
+import classes from "./index.module.styl"
 import { state } from "@/store"
-import { Show, createSignal } from "solid-js"
+import { createSignal, createEffect, on } from "solid-js"
 import type { Component, Signal } from "solid-js"
 import type { handle } from "@/type"
 
 type attr = {
-  show: Signal<boolean>
+  open: Signal<boolean>
   message: string
   /**
    * Default behavior is to hide the popup, unless `event.preventDefault()` or `return false`
@@ -14,7 +14,17 @@ type attr = {
 }
 
 export default ((props: attr) => {
-  const [getOpen, setOpen] = props.show
+  let dialogRef: HTMLDialogElement
+  const [getOpen, setOpen] = props.open
+  createEffect(
+    on(getOpen, open => {
+      if (open) {
+        dialogRef.show()
+      } else {
+        dialogRef.close()
+      }
+    })
+  )
   const [getButtonDisabled, setButtonDisabled] = createSignal(false)
   const close = async (e: Event) => {
     setButtonDisabled(true)
@@ -24,36 +34,34 @@ export default ((props: attr) => {
     setButtonDisabled(false)
   }
   return (
-    <Show when={getOpen()}>
-      <div
-        id="alert-box"
-        class="na-dialog"
+    <dialog
+      class={`na-dialog ${classes.dialog}`}
+      ref={dialogRef}
+      style={{
+        width: state.width * Math.sqrt(2) + "px",
+        height: state.width * Math.sqrt(2) + "px",
+        padding: state.width / 10 + "px",
+        gap: state.width / 10 + "px",
+      }}
+    >
+      <p
         style={{
-          width: state.width * Math.sqrt(2) + "px",
-          height: state.width * Math.sqrt(2) + "px",
-          padding: state.width / 10 + "px",
-          gap: state.width / 10 + "px",
+          "font-size": `${state.width / 150}rem`,
         }}
       >
-        <p
-          style={{
-            "font-size": `${state.width / 150}rem`,
-          }}
-        >
-          {props.message}
-        </p>
-        <button
-          class="na-button"
-          style={{
-            padding: `${state.width / 20}px ${state.width / 10}px`,
-            "border-radius": state.width / 50 + "px",
-          }}
-          onclick={close}
-          disabled={getButtonDisabled()}
-        >
-          yes
-        </button>
-      </div>
-    </Show>
+        {props.message}
+      </p>
+      <button
+        class="na-button"
+        style={{
+          padding: `${state.width / 20}px ${state.width / 10}px`,
+          "border-radius": state.width / 50 + "px",
+        }}
+        onclick={close}
+        disabled={getButtonDisabled()}
+      >
+        yes
+      </button>
+    </dialog>
   )
 }) as Component<attr>
