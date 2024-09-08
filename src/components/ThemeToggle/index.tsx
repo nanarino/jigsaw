@@ -1,9 +1,8 @@
 import type { Component } from "solid-js"
 import moon from "@/assets/moon.svg?raw"
 import sun from "@/assets/sun.svg?raw"
+import toggle from "@holy-two/data-theme/dist/toggle"
 import "./index.styl"
-
-const themeTuple = ["dark", "light"] as const
 
 export default (() => {
   return (
@@ -13,11 +12,7 @@ export default (() => {
       innerHTML={moon + sun}
       title="theme toggle"
       data-round
-      onclick={() => {
-        const theme = themeTuple.at(themeTuple.indexOf(window.theme) - 1)
-        document.documentElement.dataset["theme"] = theme
-        localStorage.setItem("theme", theme)
-      }}
+      onclick={toggle}
     />
   )
 }) as Component
