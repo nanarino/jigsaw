@@ -31,14 +31,14 @@ nanarino jigsaw
     # 安裝依賴
     pnpm i
     # 運行開發伺服器
-    npx vite
+    pnpm vite
 
 
 構建
 ======
 ::
 
-    npx vite build
+    pnpm build
 
 
 預覽
