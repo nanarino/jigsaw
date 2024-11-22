@@ -2,7 +2,7 @@ import classes from "./index.module.styl"
 import { state } from "@/store"
 import { createSignal, createEffect, on } from "solid-js"
 import type { Component, Signal } from "solid-js"
-import type { handle } from "@/type"
+import type { HandleClick } from "@/type"
 
 type attr = {
   open: Signal<boolean>
@@ -10,7 +10,7 @@ type attr = {
   /**
    * Default behavior is to hide the popup, unless `event.preventDefault()` or `return false`
    */
-  onClose?: handle
+  onClose?: HandleClick
 }
 
 export default ((props: attr) => {
@@ -26,9 +26,9 @@ export default ((props: attr) => {
     })
   )
   const [getButtonDisabled, setButtonDisabled] = createSignal(false)
-  const close = async (e: Event) => {
+  const close = async (e: MouseEvent) => {
     setButtonDisabled(true)
-    if ((props.onClose && (await props.onClose(e))) === false) return
+    if ((props.onClose && (await props.onClose(e))) === false) return false
     if (e.defaultPrevented) return
     setOpen(false)
     setButtonDisabled(false)

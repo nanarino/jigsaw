@@ -3,7 +3,7 @@ import type { Component } from "solid-js"
 import classes from "./index.module.styl"
 import Alert from "@/components/Alert"
 import { state, setState } from "@/store"
-import type { pst, handle } from "@/type"
+import type { Pst, HandleClick } from "@/type"
 import { sleep, shuffle, isValid } from "@/util"
 
 const { ORDER, IMG_PACKAGE_LEN } = state
@@ -11,8 +11,8 @@ const LAST = ORDER ** 2 - 1
 const getInitPstArray = () =>
   new Array(LAST + 1)
     .fill(0)
-    .map((i, j) => j.toString(ORDER).padStart(2, "0")) as pst[]
-const orgArray: pst[] = getInitPstArray()
+    .map((i, j) => j.toString(ORDER).padStart(2, "0")) as Pst[]
+const orgArray: Pst[] = getInitPstArray()
 const DEFAULT_MESSAGE = "Are you OK?"
 
 export default (() => {
@@ -27,12 +27,12 @@ export default (() => {
    *
    *  hole does not exist
    */
-  const [getPstArray, setPstArray] = createSignal<pst[]>(getInitPstArray(), {
+  const [getPstArray, setPstArray] = createSignal<Pst[]>(getInitPstArray(), {
     equals: false,
   })
   async function shuffleJigsaw(e: Event) {
     const pstArray = getPstArray()
-    let shuffledPstArray: pst[]
+    let shuffledPstArray: Pst[]
     do {
       shuffledPstArray = shuffle([...pstArray])
     } while (!isValid(shuffledPstArray, { width: ORDER, height: ORDER }))
@@ -47,7 +47,8 @@ export default (() => {
       setPstArray(pstArray)
     }
   }
-  const [getHandleClose, bindHandleClose] = createSignal<handle>(shuffleJigsaw)
+  const [getHandleClose, bindHandleClose] =
+    createSignal<HandleClick>(shuffleJigsaw)
 
   // Start
   const [getStep, setStep] = createSignal(-2)
