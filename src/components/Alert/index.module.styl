@@ -1,4 +1,5 @@
-@import 'nanarinostyl/src/lib/variable/*'
+@require 'nanarinostyl/lib/mixins/*'
+@require 'nanarinostyl/lib/variables/*'
 
 .dialog
   position absolute
@@ -6,8 +7,6 @@
   align-items center
   box-sizing border-box
   border-radius 50%
-  background-color rgb(var(--white) \/ 30%)
-  backdrop-filter blur(24px)
   &[open]
     display grid
   p

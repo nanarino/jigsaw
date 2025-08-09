@@ -44,3 +44,5 @@ nanarino jigsaw
 預覽
 ======
 https://nanarino.github.io/jigsaw/
+
+* ``?img={0|1|2}`` 指定圖包

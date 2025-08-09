@@ -1,10 +1,15 @@
-@import 'nanarinostyl/src/lib/variable/*'
-@import 'nanarinostyl/src/lib/font.styl'
-@import 'nanarinostyl/src/lib/primary.styl'
-@import 'nanarinostyl/src/lib/typography/image.styl'
-@import 'nanarinostyl/src/lib/components/button.styl'
-@import 'nanarinostyl/src/lib/components/dialog.styl'
+@require 'nanarinostyl/lib/mixins/*'
+@require 'nanarinostyl/lib/variables/*'
+@require 'nanarinostyl/lib/primary'
+@require 'nanarinostyl/lib/common/font'
+@require 'nanarinostyl/lib/typography/image'
+@require 'nanarinostyl/lib/components/button'
+@require 'nanarinostyl/lib/components/dialog'
 
 body
   margin 0
   padding 0
+
+.glass
+  background-color rgb(var(--gray-3) \/ 30%)
+  backdrop-filter blur(24px)

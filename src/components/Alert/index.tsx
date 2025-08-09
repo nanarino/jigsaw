@@ -35,7 +35,8 @@ export default ((props: attr) => {
   }
   return (
     <dialog
-      class={`na-dialog ${classes.dialog}`}
+      class={`na-dialog glass ${classes.dialog}`}
+      closedby="none"
       ref={dialogRef}
       style={{
         width: state.width * Math.sqrt(2) + "px",
