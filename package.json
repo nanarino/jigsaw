@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build-gh-pages": "vite build --base /jigsaw/",
+    "build:gh-pages": "vite build --base /jigsaw/",
     "serve": "vite preview"
   },
   "license": "MIT",
