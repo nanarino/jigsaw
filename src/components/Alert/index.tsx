@@ -41,7 +41,7 @@ export default ((props: attr) => {
       style={{
         width: state.width * Math.sqrt(2) + "px",
         height: state.width * Math.sqrt(2) + "px",
-        padding: state.width / 10 + "px",
+        "--padding-dialog": state.width / 10 + "px",
         gap: state.width / 10 + "px",
       }}
     >
