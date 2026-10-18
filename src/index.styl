@@ -1,15 +1,15 @@
-@require 'nanarinostyl/lib/mixins/*'
-@require 'nanarinostyl/lib/variables/*'
-@require 'nanarinostyl/lib/primary'
-@require 'nanarinostyl/lib/common/font'
-@require 'nanarinostyl/lib/typography/image'
-@require 'nanarinostyl/lib/components/button'
-@require 'nanarinostyl/lib/components/dialog'
+@require '@nanarino/stylus/lib/mixins/*'
+@require '@nanarino/stylus/lib/variables/*'
+@require '@nanarino/stylus/lib/common/*'
+
+@require '@nanarino/stylus/lib/typography/image'
+@require '@nanarino/stylus/lib/components/button'
+@require '@nanarino/stylus/lib/components/dialog'
 
 body
   margin 0
   padding 0
 
 .glass
-  background-color rgb(var(--gray-3) \/ 30%)
+  background-color oklch(var(--gray-3) \/ 30%)
   backdrop-filter blur(24px)

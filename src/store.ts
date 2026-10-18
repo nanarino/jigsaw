@@ -1,7 +1,9 @@
 import { createStore } from "solid-js/store"
 
 const initImgPackageIndex = () => {
-  const i = Number.parseInt(new URLSearchParams(location.search).get("img"))
+  const i = Number.parseInt(
+    new URLSearchParams(location.search).get("img") ?? "",
+  )
   if (Number.isNaN(i) || i > 2 || i < 0) return ~~(Math.random() * 3)
   else return i
 }

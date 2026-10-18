@@ -1,6 +1,6 @@
 {
   "name": "jigsaw",
-  "version": "2023.4.16",
+  "version": "2026.10.16",
   "description": "",
   "type": "module",
   "scripts": {
@@ -11,17 +11,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@holy-two/vite-plugin-alias": "^0.0.2",
+    "@holy-two/vite-plugin-alias": "^0.1.1",
     "stylus": "^0.64.0",
-    "typescript": "^5.9.2",
-    "vite": "^6.3.5",
+    "vite": "^8.3.4",
     "vite-plugin-insert-html": "^1.0.3",
-    "vite-plugin-solid": "^2.11.8"
+    "vite-plugin-solid": "^2.11.14"
   },
   "dependencies": {
     "@holy-two/data-theme": "^0.0.6",
-    "nanarinostyl": "^0.11.1",
-    "solid-js": "^1.9.9"
+    "@nanarino/stylus": "^2.0.2",
+    "solid-js": "^1.9.17"
   },
   "pnpm": {
     "overrides": {

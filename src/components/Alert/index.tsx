@@ -14,7 +14,7 @@ type attr = {
 }
 
 export default ((props: attr) => {
-  let dialogRef: HTMLDialogElement
+  let dialogRef!: HTMLDialogElement
   const [getOpen, setOpen] = props.open
   createEffect(
     on(getOpen, open => {

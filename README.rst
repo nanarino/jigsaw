@@ -2,7 +2,7 @@
 nanarino jigsaw
 ===============
 
-一個 `nanarinostyl <https://nanarino.github.io/nanarinostyl/>`_ 主題的 拼圖游戲 demo 。
+一個 拼圖游戲 DEMO 。
 
 剛接觸 WEB 個陣時嘅作品。而家用 ``SolidJS`` 淺淺地重構一下。
 
@@ -17,8 +17,8 @@ nanarino jigsaw
     :alt: pnpm 9.0
     :target: https://pnpm.io/
 
-.. image:: https://img.shields.io/badge/Node.js-v20.17.0-026e00.svg?style=for-the-badge&logo=nodedotjs
-    :alt: Node.js v20.17.0
+.. image:: https://img.shields.io/badge/Node.js-v24.15.0-026e00.svg?style=for-the-badge&logo=nodedotjs
+    :alt: Node.js v24.15.0
     :target: https://nodejs.org/
 
 .. highlight:: bash

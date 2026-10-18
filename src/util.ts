@@ -37,10 +37,10 @@ function resolveInversionNumber<T>(arr: T[]): number {
  */
 export const isValid = (
   arr: string[],
-  jigsaw: { width: number; height: number }
+  jigsaw: { width: number; height: number },
 ) => {
   const { width, height } = jigsaw
-  const [x, y] = arr.at(-1)
+  const [x, y] = arr.at(-1)!
   return (
     ((+x + width - 1) % 2 === (+y + height - 1) % 2) ===
     (resolveInversionNumber(arr) % 2 === 0)

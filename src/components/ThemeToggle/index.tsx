@@ -5,6 +5,7 @@ import toggle from "@holy-two/data-theme/dist/toggle"
 import classes from "./index.module.styl"
 
 export default (() => {
+  if (window !== window.top) return
   return (
     <button
       class={`na-button glass ${classes.button}`}

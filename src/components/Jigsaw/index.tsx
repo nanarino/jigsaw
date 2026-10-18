@@ -38,12 +38,12 @@ export default (() => {
     } while (!isValid(shuffledPstArray, { width: ORDER, height: ORDER }))
     for (const i of Object.keys(pstArray)) {
       await sleep(40)
-      pstArray[i] = "00"
+      Reflect.set(pstArray, i, "00")
       setPstArray(pstArray)
     }
     for (const [i, pst] of Object.entries(shuffledPstArray)) {
       await sleep(40)
-      pstArray[i] = pst
+      Reflect.set(pstArray, i, pst)
       setPstArray(pstArray)
     }
   }
@@ -60,7 +60,7 @@ export default (() => {
         return
       } else if (step > 0) {
         for (const [index, thisPst] of Object.entries(getPstArray())) {
-          if (thisPst !== orgArray[index]) return
+          if (thisPst !== Reflect.get(orgArray, index)) return
         }
         // when clear the game
         setMessage(`${step} steps to clear`)
@@ -73,7 +73,7 @@ export default (() => {
         })
         setAlertIsOpen(true)
       }
-    })
+    }),
   )
 
   return (
@@ -103,13 +103,14 @@ export default (() => {
               if (LAST !== THIS) {
                 if (
                   [10, 1].includes(
-                    Math.abs(+getPstArray()[LAST] - +getPstArray()[THIS])
+                    Math.abs(+getPstArray()[LAST] - +getPstArray()[THIS]),
                   )
                 ) {
                   setPstArray(
                     now => (
-                      ([now[LAST], now[THIS]] = [now[THIS], now[LAST]]), now
-                    )
+                      ([now[LAST], now[THIS]] = [now[THIS], now[LAST]]),
+                      now
+                    ),
                   )
                   setStep(step => ++step)
                 }
