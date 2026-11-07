@@ -1,3 +1,27 @@
+/**
+ * Center-crop `img` to a square, then show cell `(row, col)` of an
+ * `order`×`order` grid by scaling that square onto the board and
+ * shifting it with `background-position`.
+ */
+export function squareSliceBackground(
+  img: { src: string; width: number; height: number },
+  cell: { row: number; col: number },
+  grid: { order: number; tile: number },
+) {
+  const side = Math.min(img.width, img.height)
+  const cropX = (img.width - side) / 2
+  const cropY = (img.height - side) / 2
+  const scale = (grid.tile * grid.order) / side
+  const srcX = cropX + (cell.col * side) / grid.order
+  const srcY = cropY + (cell.row * side) / grid.order
+  return {
+    "background-image": `url(${JSON.stringify(img.src)})`,
+    "background-repeat": "no-repeat",
+    "background-size": `${img.width * scale}px ${img.height * scale}px`,
+    "background-position": `${-srcX * scale}px ${-srcY * scale}px`,
+  }
+}
+
 export function sleep(time: number) {
   return new Promise(resolve => setTimeout(resolve, time))
 }
@@ -26,11 +50,11 @@ function resolveInversionNumber<T>(arr: T[]): number {
 /**
  *
  * @param arr the arr.length = width * height,
- *     For this project, it's interval `['00', '01', ..., '33']`
+ *     For this project, it's interval `['00', '01', ..., '88']`
  *
- * @param jigsaw Since more than decimal will be format by letters
- *     the width and height should be between 2 and 10 🤔，
- *     For this project, it's `{width: 4, height: 4}`
+ * @param jigsaw Each coordinate is one digit, so the width and height
+ *     stay between 2 and 9.
+ *     For this project, it's `{width: 3, height: 3}` by default.
  *
  * @returns it was supposed to be inversion number,
  *     But moved times of the empty squares is also taken into `(inversion number % 2) === (moved time % 2)`

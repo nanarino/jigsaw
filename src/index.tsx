@@ -13,13 +13,9 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   )
 }
 
-/**
- * Reduce difficulty to test
- */
-// setState({ ORDER: 2 })
 const resize = () =>
   setState({
-    width: Math.min(window.innerWidth, window.innerHeight, 776) / state.ORDER,
+    width: Math.min(window.innerWidth, window.innerHeight, 776) / state.order,
   })
 resize()
 window.onresize = resize
