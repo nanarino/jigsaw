@@ -10,7 +10,7 @@ export default (() => {
     <button
       class={`na-button glass ${classes.button}`}
       innerHTML={moon + sun}
-      title="theme toggle"
+      title="Please use this light and dark switch to suit your puzzle"
       data-round
       onclick={toggle}
     />

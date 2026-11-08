@@ -23,7 +23,7 @@ export default ((props: attr) => {
       } else {
         dialogRef.close()
       }
-    })
+    }),
   )
   const [getButtonDisabled, setButtonDisabled] = createSignal(false)
   const close = async (e: MouseEvent) => {
@@ -33,21 +33,22 @@ export default ((props: attr) => {
     setOpen(false)
     setButtonDisabled(false)
   }
+  const getSize = () => Math.max(state.width * Math.sqrt(2), 360) + "px"
   return (
     <dialog
       class={`na-dialog glass ${classes.dialog}`}
       closedby="none"
       ref={dialogRef}
       style={{
-        width: state.width * Math.sqrt(2) + "px",
-        height: state.width * Math.sqrt(2) + "px",
+        width: getSize(),
+        height: getSize(),
         "--padding-dialog": state.width / 10 + "px",
         gap: state.width / 10 + "px",
       }}
     >
       <p
         style={{
-          "font-size": `${state.width / 150}rem`,
+          "font-size": `max(${state.width / 15}px, 18px)`,
         }}
       >
         {props.message}
